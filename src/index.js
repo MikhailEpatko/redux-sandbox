@@ -5,6 +5,8 @@ const reducer = (state = 0, action) => {
   switch (action.type) {
     case 'INC':
       return state + 1;
+    case 'DEC':
+      return  state - 1;
     default:
       return state;
   }
@@ -12,11 +14,22 @@ const reducer = (state = 0, action) => {
 
 const store = createStore(reducer);
 
-store.subscribe(() => {
-  console.log('now:', store.getState());
-});
+document
+  .getElementById('inc')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'INC'});
+  });
 
-console.log('initial: ', store.getState());
+document
+  .getElementById('dec')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'DEC'});
+  });
 
-store.dispatch({type: 'INC'});
-store.dispatch({type: 'INC'});
+const update = () => {
+  document
+    .getElementById('counter')
+    .innerHTML = store.getState();
+};
+
+store.subscribe(update);
