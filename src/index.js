@@ -29,7 +29,7 @@ document
 const update = () => {
   document
     .getElementById('counter')
-    .innerHTML = store.getState();
+    .innerText = store.getState();
 };
 
 store.subscribe(update);
